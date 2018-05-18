@@ -95,7 +95,10 @@
                         <div class="stars">
                             <div class="stars-in"> </div>
                         </div>
-                        <span class="year">${item.releasedYear}</span> </div>
+                    </div>
+                    <div>
+                        <p>YEAR <span class="year">${item.releasedYear}</span></p>
+                    </div>
                 </div>
 </c:forEach>
                 <div class="movie">
