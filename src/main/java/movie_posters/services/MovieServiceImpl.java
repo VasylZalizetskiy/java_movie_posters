@@ -1,6 +1,6 @@
-package com.example.project.services;
-import com.example.project.models.Movie;
-import com.example.project.repositories.MovieRepository;
+package movie_posters.services;
+import movie_posters.models.Movie;
+import movie_posters.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;

@@ -1,6 +1,6 @@
-package com.example.project.services;
+package movie_posters.services;
 
-import com.example.project.models.Movie;
+import movie_posters.models.Movie;
 
 import java.util.List;
 

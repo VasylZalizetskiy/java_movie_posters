@@ -1,5 +1,5 @@
-package com.example.project.repositories;
-import com.example.project.models.Movie;
+package movie_posters.repositories;
+import movie_posters.models.Movie;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 @Repository
