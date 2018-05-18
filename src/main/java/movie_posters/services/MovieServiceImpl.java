@@ -8,6 +8,13 @@ import java.util.List;
 public class MovieServiceImpl implements MovieService {
     @Autowired
     private MovieRepository movieRepository;
+
+    @Override
+    public List<Movie> getAllMovies(int year){
+        return movieRepository.findByYear(year);
+    }
+
+    @Override
     public List<Movie> getAllMovies(){
         return movieRepository.findAll();
     }

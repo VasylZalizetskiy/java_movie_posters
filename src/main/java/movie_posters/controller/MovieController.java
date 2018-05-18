@@ -21,13 +21,14 @@ public class MovieController {
     @Autowired
     MovieService movieService;
 
-   @GetMapping("/")
-   public String index(ModelMap model) {
-       List<Movie> movieList = movieService.getAllMovies();
-       model.addAttribute("movieList", movieList);
+    @GetMapping("/")
+    public String listByYear(@RequestParam(name="year", required=false) Integer year, ModelMap model) {
+        List<Movie> movieList = (year != null) ? movieService.getAllMovies(year) : movieService.getAllMovies();
 
-      return "index";
-   }
+        model.addAttribute("movieList", movieList);
+
+        return "index";
+    }
 
     @PostMapping("/")
     public String addMovie(Movie movie, ModelMap model) {

@@ -63,10 +63,11 @@
         </div>
         <div id="sub-navigation">
             <ul>
-                <li><a href="#">SHOW ALL</a></li>
-                <li><a href="#">LATEST TRAILERS</a></li>
-                <li><a href="#">TOP RATED</a></li>
-                <li><a href="#">MOST COMMENTED</a></li>
+                <li><a href="/?year=1997">1997</a></li>
+                <li><a href="/?year=2002">2002</a></li>
+                <li><a href="/?year=2003">2003</a></li>
+                <li><a href="/?year=2008">2008</a></li>
+                <li><a href="/?year=2018">2018</a></li>
             </ul>
             <div id="search">
                 <form action="#" method="get" accept-charset="utf-8">
@@ -149,8 +150,8 @@
         <div class="cl">&nbsp;</div>
     </div>
     <div id="footer">
-        <p class="lf">Copyright &copy; 2010 <a href="#">SiteName</a> - All Rights Reserved</p>
-        <p class="rf">Design by <a href="http://chocotemplates.com/">ChocoTemplates.com</a></p>
+        <p class="lf">Copyright &copy; 2018 <a href="#">Simple JSP</a> - All Rights Reserved</p>
+        <p class="rf">Design by <a href="#">Simple JSP</a></p>
         <div style="clear:both;"></div>
     </div>
 </div>
