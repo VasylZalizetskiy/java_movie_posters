@@ -1,3 +1,2 @@
 # movie_posters
-Very minimalistic app with REST API using Spring Boot, Spring Data, Maven and MongoDB repository.
-It contains all basic CRUD operations.
+Simple App with Maven, Spring Boot, Spring Data, MongoDB repository, JSP, JSTL.
