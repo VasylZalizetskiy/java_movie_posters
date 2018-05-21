@@ -11,7 +11,7 @@ public interface MovieService {
 
     Movie getMovieById(String id);
 
-    Movie addMovie(Movie movie);
+    void addMovie(Movie movie);
 
     Movie updateMovie(Movie movie);
 

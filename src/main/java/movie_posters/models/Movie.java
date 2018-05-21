@@ -10,7 +10,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class Movie implements Serializable{
     @Id
-    private String id;
+    @Getter private String id;
     @Getter @Setter private String name;
     @Getter @Setter private int releasedYear;
     @Getter @Setter private String image;

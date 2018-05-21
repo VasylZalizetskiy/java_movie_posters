@@ -2,10 +2,11 @@ package movie_posters.services;
 import movie_posters.models.Movie;
 import movie_posters.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
 import java.util.List;
-@Service
-public class MovieServiceImpl implements MovieService {
+@Service("MovieServiceRepositoryImpl")
+public class MovieServiceRepositoryImpl implements MovieService {
     @Autowired
     private MovieRepository movieRepository;
 
@@ -22,9 +23,10 @@ public class MovieServiceImpl implements MovieService {
     public Movie getMovieById(String id) {
         return movieRepository.findOne(id);
     }
+
     @Override
-    public Movie addMovie(Movie movie) {
-        return movieRepository.save(movie);
+    public void addMovie(Movie movie) {
+        movieRepository.save(movie);
     }
     @Override
     public Movie updateMovie(Movie movie) {
