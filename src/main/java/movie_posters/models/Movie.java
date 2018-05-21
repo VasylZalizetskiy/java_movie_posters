@@ -1,18 +1,41 @@
 package movie_posters.models;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import java.io.Serializable;
 
-@AllArgsConstructor
-@NoArgsConstructor
 public class Movie implements Serializable{
     @Id
-    @Getter private String id;
-    @Getter @Setter private String name;
-    @Getter @Setter private int releasedYear;
-    @Getter @Setter private String image;
+    private String id;
+    private String name;
+    private int releasedYear;
+    private String image;
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setReleasedYear(int releasedYear) {
+        this.releasedYear = releasedYear;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getReleasedYear() {
+        return releasedYear;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public Movie() {}
+    public Movie(String name, int releasedYear) {
+        this.name = name;
+        this.releasedYear = releasedYear;
+    }
 }

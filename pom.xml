@@ -37,16 +37,23 @@
       <artifactId>tomcat-embed-jasper</artifactId>
       <scope>provided</scope>
     </dependency>
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.16.20</version>
-      <scope>provided</scope>
-    </dependency>
   </dependencies>
 
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok-maven-plugin</artifactId>
+        <version>1.16.20.0</version>
+        <executions>
+          <execution>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>delombok</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
