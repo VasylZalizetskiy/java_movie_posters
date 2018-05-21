@@ -4,6 +4,8 @@ import movie_posters.models.Movie;
 import movie_posters.repositories.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,8 +19,10 @@ public class MovieServiceTemplateImpl implements MovieService {
     private MongoTemplate mongoTemplate;
 
     @Override
-    public List<Movie> getAllMovies(int year){
-        return movieRepository.findByYear(year);
+    public List<Movie> getAllMovies(int year) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("releasedYear").is(year));
+        return mongoTemplate.find(query, Movie.class );
     }
 
     @Override
