@@ -1,4 +1,4 @@
-package movie_posters.messaging;
+package ua.pp.movie_posters.webapp.messaging;
 
 import java.util.concurrent.CountDownLatch;
 import org.springframework.stereotype.Component;

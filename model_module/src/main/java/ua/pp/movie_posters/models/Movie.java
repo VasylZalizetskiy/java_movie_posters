@@ -1,8 +1,8 @@
-package movie_posters.models;
+package ua.pp.movie_posters.models;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import movie_posters.models.serialization.MovieDeserializer;
-import movie_posters.models.serialization.MovieSerializer;
+import ua.pp.movie_posters.models.serialization.MovieDeserializer;
+import ua.pp.movie_posters.models.serialization.MovieSerializer;
 import org.springframework.data.annotation.Id;
 import java.io.Serializable;
 

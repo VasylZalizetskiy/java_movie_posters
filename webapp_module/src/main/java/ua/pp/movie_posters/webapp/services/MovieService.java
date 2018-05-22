@@ -1,6 +1,6 @@
-package movie_posters.services;
+package ua.pp.movie_posters.webapp.services;
 
-import movie_posters.models.Movie;
+import ua.pp.movie_posters.models.Movie;
 
 import java.util.List;
 

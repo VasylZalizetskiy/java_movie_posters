@@ -1,9 +1,9 @@
-package movie_posters.models.serialization;
+package ua.pp.movie_posters.models.serialization;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.*;
-import movie_posters.models.Movie;
+import ua.pp.movie_posters.models.Movie;
 
 import java.io.IOException;
 

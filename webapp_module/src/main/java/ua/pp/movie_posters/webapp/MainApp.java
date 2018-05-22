@@ -1,6 +1,7 @@
-package movie_posters;
+package ua.pp.movie_posters.webapp;
 
-import movie_posters.messaging.Receiver;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import ua.pp.movie_posters.webapp.messaging.Receiver;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
@@ -11,6 +12,7 @@ import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import ua.pp.movie_posters.webapp.repositories.MovieRepository;
 
 @SpringBootApplication
 public class MainApp {

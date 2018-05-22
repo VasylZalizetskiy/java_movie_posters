@@ -1,4 +1,4 @@
-package movie_posters.configs;
+package ua.pp.movie_posters.webapp.configs;
 
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @Configuration
-@EnableMongoRepositories(basePackages = "movie_posters.repositories")
+@EnableMongoRepositories(basePackages = "ua.pp.movie_posters.webapp.repositories")
 public class MongoConfig {
 
     @Bean

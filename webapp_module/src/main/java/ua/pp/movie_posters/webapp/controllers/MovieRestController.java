@@ -1,6 +1,6 @@
-package movie_posters.controllers;
-import movie_posters.models.Movie;
-import movie_posters.services.MovieService;
+package ua.pp.movie_posters.webapp.controllers;
+import ua.pp.movie_posters.models.Movie;
+import ua.pp.movie_posters.webapp.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;

@@ -1,9 +1,9 @@
-package movie_posters.controllers;
+package ua.pp.movie_posters.webapp.controllers;
 
-import movie_posters.MainApp;
-import movie_posters.messaging.Receiver;
-import movie_posters.models.Movie;
-import movie_posters.services.MovieService;
+import ua.pp.movie_posters.webapp.MainApp;
+import ua.pp.movie_posters.webapp.messaging.Receiver;
+import ua.pp.movie_posters.models.Movie;
+import ua.pp.movie_posters.webapp.services.MovieService;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

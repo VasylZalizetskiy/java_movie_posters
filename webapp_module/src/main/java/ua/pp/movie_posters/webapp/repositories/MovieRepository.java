@@ -1,5 +1,5 @@
-package movie_posters.repositories;
-import movie_posters.models.Movie;
+package ua.pp.movie_posters.webapp.repositories;
+import ua.pp.movie_posters.models.Movie;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;

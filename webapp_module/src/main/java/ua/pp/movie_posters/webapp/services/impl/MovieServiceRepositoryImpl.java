@@ -1,10 +1,10 @@
-package movie_posters.services.impl;
-import movie_posters.models.Movie;
-import movie_posters.repositories.MovieRepository;
-import movie_posters.services.MovieService;
+package ua.pp.movie_posters.webapp.services.impl;
+import ua.pp.movie_posters.models.Movie;
+import ua.pp.movie_posters.webapp.repositories.MovieRepository;
+import ua.pp.movie_posters.webapp.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 @Service("MovieServiceRepositoryImpl")
 public class MovieServiceRepositoryImpl implements MovieService {
