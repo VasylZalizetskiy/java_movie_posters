@@ -63,6 +63,7 @@
         </div>
         <div id="sub-navigation">
             <ul>
+                <li><a href="/">All</a></li>
                 <li><a href="/?year=1997">1997</a></li>
                 <li><a href="/?year=2002">2002</a></li>
                 <li><a href="/?year=2003">2003</a></li>

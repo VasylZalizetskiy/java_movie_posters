@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface MovieRepository extends MongoRepository<Movie,String>{
 
-    @Query(value = "{'releasedYear': {$eq: ?0} }")
+    @Query(value = "{'year': {$eq: ?0} }")
     List<Movie> findByYear(int year);
 
 }

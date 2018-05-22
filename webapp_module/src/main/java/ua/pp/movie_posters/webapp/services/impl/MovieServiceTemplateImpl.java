@@ -22,7 +22,7 @@ public class MovieServiceTemplateImpl implements MovieService {
     @Override
     public List<Movie> getAllMovies(int year) {
         Query query = new Query();
-        query.addCriteria(Criteria.where("releasedYear").is(year));
+        query.addCriteria(Criteria.where("year").is(year));
         return mongoTemplate.find(query, Movie.class );
     }
 
