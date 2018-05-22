@@ -27,8 +27,8 @@
                 <label for="name"><b>Movie Name</b></label>
                 <input type="text" placeholder="Movie Name" name="name" required>
 
-                <label for="releasedYear"><b>Released Year</b></label>
-                <input type="text" placeholder="releasedYear" name="releasedYear" required>
+                <label for="year"><b>Released Year</b></label>
+                <input type="text" placeholder="year" name="year" required>
 
                 <label for="image"><b>Image</b></label>
                 <input type="text" placeholder="image" name="image" required>
@@ -98,7 +98,7 @@
                         </div>
                     </div>
                     <div>
-                        <p>YEAR <span class="year">${item.releasedYear}</span></p>
+                        <p>YEAR <span class="year">${item.year}</span></p>
                     </div>
                 </div>
 </c:forEach>

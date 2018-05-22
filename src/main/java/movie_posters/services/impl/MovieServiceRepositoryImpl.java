@@ -1,41 +1,33 @@
-package movie_posters.services;
-
+package movie_posters.services.impl;
 import movie_posters.models.Movie;
 import movie_posters.repositories.MovieRepository;
+import movie_posters.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-
-@Service("MovieServiceTemplateImpl")
-public class MovieServiceTemplateImpl implements MovieService {
+@Service("MovieServiceRepositoryImpl")
+public class MovieServiceRepositoryImpl implements MovieService {
     @Autowired
     private MovieRepository movieRepository;
 
-    @Autowired
-    private MongoTemplate mongoTemplate;
-
     @Override
-    public List<Movie> getAllMovies(int year) {
-        Query query = new Query();
-        query.addCriteria(Criteria.where("releasedYear").is(year));
-        return mongoTemplate.find(query, Movie.class );
+    public List<Movie> getAllMovies(int year){
+        return movieRepository.findByYear(year);
     }
 
     @Override
     public List<Movie> getAllMovies(){
-        return mongoTemplate.findAll(Movie.class);
+        return movieRepository.findAll();
     }
     @Override
     public Movie getMovieById(String id) {
         return movieRepository.findOne(id);
     }
+
     @Override
     public void addMovie(Movie movie) {
-        mongoTemplate.save(movie, "movie");
+        movieRepository.save(movie);
     }
     @Override
     public Movie updateMovie(Movie movie) {
