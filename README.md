@@ -1,2 +1,3 @@
 # movie_posters
-Simple App with Maven, Spring Boot, Spring Data, MongoDB repository, JSP, JSTL.
+Simple Web App. 
+Technology stack: Maven, Spring Boot, Spring Data, MongoDB repository, MongoDB template, RabbitMQ, Rest, JSP, JSTL.
