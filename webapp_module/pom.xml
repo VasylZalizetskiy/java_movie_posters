@@ -6,7 +6,11 @@
         <artifactId>parent</artifactId>
         <version>0.1-SNAPSHOT</version>
     </parent>
-
+    <properties>
+        <start-class>ua.pp.movie_posters.webapp.MainApp</start-class>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
     <artifactId>webapp_module</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>war</packaging>

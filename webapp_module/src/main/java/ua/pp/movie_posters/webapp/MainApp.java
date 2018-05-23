@@ -1,5 +1,7 @@
 package ua.pp.movie_posters.webapp;
 
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import ua.pp.movie_posters.webapp.messaging.Receiver;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -13,7 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class MainApp {
+public class MainApp extends SpringBootServletInitializer {
 
    static public final String topicExchangeName = "spring-boot-exchange";
 
@@ -47,6 +49,11 @@ public class MainApp {
    @Bean
    MessageListenerAdapter listenerAdapter(Receiver receiver) {
       return new MessageListenerAdapter(receiver, "receiveMessage");
+   }
+
+   @Override
+   protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+      return application.sources(MainApp.class);
    }
 
 
