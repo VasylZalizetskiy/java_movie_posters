@@ -17,9 +17,9 @@ public class MovieRestController {
         return movieService.getAllMovies();
     }
     @ResponseBody
-    @RequestMapping(value = "/api/movies/{id}", method = RequestMethod.GET)
-    public Movie getMovieByName(@PathVariable String id) {
-        return movieService.getMovieById(id);
+    @RequestMapping(value = "/api/movies/{name}", method = RequestMethod.GET)
+    public Movie getMovieByName(@PathVariable String name) {
+        return movieService.getMovieByName(name);
     }
     @ResponseBody
     @RequestMapping(value = "/api/movies", method = RequestMethod.POST)
@@ -28,13 +28,15 @@ public class MovieRestController {
     }
     @ResponseBody
     @RequestMapping(value = "/api/movies", method = RequestMethod.PUT)
-    public Movie updateMovie(@RequestBody Movie movie) {
-        return movieService.updateMovie(movie);
+    public String updateMovie(@RequestBody Movie movie) {
+        movieService.updateMovie(movie);
+        return "Updated";
     }
     @ResponseBody
-    @RequestMapping(value = "/api/movies/{id}", method = RequestMethod.DELETE)
-    public String deleteMovie(@PathVariable String id) {
-        movieService.deleteMovie(id);
+    @RequestMapping(value = "/api/movies/{name}", method = RequestMethod.DELETE)
+    public String deleteMovie(@PathVariable String name) {
+        Movie movie = movieService.getMovieByName(name);
+        movieService.deleteMovie(movie);
         return "Deleted";
     }
 }

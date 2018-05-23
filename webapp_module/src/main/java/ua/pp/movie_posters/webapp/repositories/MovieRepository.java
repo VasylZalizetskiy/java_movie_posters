@@ -12,4 +12,6 @@ public interface MovieRepository extends MongoRepository<Movie,String>{
     @Query(value = "{'year': {$eq: ?0} }")
     List<Movie> findByYear(int year);
 
+    @Query(value = "{'name': {$eq: ?0} }")
+    Movie findByName(String name);
 }

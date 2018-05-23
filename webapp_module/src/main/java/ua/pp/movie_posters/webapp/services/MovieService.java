@@ -9,11 +9,11 @@ public interface MovieService {
 
     List<Movie> getAllMovies(int year);
 
-    Movie getMovieById(String id);
+    Movie getMovieByName(String name);
 
     void addMovie(Movie movie);
 
-    Movie updateMovie(Movie movie);
+    void updateMovie(Movie movie);
 
-    void deleteMovie(String id);
+    void deleteMovie(Movie movie);
 }

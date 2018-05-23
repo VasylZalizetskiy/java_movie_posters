@@ -42,6 +42,15 @@ public class MovieController {
         return "index";
     }
 
+    @GetMapping("/admin")
+    public String adminListByYear(@RequestParam(name="year", required=false) Integer year, ModelMap model) {
+        List<Movie> movieList = (year != null) ? movieService.getAllMovies(year) : movieService.getAllMovies();
+
+        model.addAttribute("movieList", movieList);
+
+        return "index";
+    }
+
     @PostMapping("/")
     public String addMovie(Movie movie, ModelMap model) {
         rabbitTemplate.convertAndSend(MainApp.topicExchangeName, "foo.bar.baz", "Movie: "+movie.getName()+" are created!");

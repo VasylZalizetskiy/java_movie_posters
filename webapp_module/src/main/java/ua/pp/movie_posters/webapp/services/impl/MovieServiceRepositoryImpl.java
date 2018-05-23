@@ -17,24 +17,27 @@ public class MovieServiceRepositoryImpl implements MovieService {
     }
 
     @Override
+    public Movie getMovieByName(String name) {
+        return movieRepository.findByName(name);
+    }
+
+    @Override
     public List<Movie> getAllMovies(){
         return movieRepository.findAll();
-    }
-    @Override
-    public Movie getMovieById(String id) {
-        return movieRepository.findOne(id);
     }
 
     @Override
     public void addMovie(Movie movie) {
         movieRepository.save(movie);
     }
+
     @Override
-    public Movie updateMovie(Movie movie) {
-        return movieRepository.save(movie);
+    public void updateMovie(Movie movie) {
+        movieRepository.save(movie);
     }
+
     @Override
-    public void deleteMovie(String id) {
-        movieRepository.delete(id);
+    public void deleteMovie(Movie movie) {
+        movieRepository.delete(movie);
     }
 }

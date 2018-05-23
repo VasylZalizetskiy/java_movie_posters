@@ -48,7 +48,12 @@
             <artifactId>standard</artifactId>
             <version>1.1.2</version>
         </dependency>
-
+        <!-- security -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <!-- security -->
     </dependencies>
     <build>
         <plugins>

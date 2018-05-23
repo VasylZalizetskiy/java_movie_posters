@@ -23,27 +23,33 @@ public class MovieServiceTemplateImpl implements MovieService {
     public List<Movie> getAllMovies(int year) {
         Query query = new Query();
         query.addCriteria(Criteria.where("year").is(year));
-        return mongoTemplate.find(query, Movie.class );
+        return mongoTemplate.find(query, Movie.class);
     }
 
     @Override
-    public List<Movie> getAllMovies(){
+    public List<Movie> getAllMovies() {
         return mongoTemplate.findAll(Movie.class);
     }
+
     @Override
-    public Movie getMovieById(String id) {
-        return movieRepository.findOne(id);
+    public Movie getMovieByName(String name) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("name").is(name));
+       return mongoTemplate.findOne(query, Movie.class);
     }
+
     @Override
     public void addMovie(Movie movie) {
-        mongoTemplate.save(movie, "movie");
+        mongoTemplate.save(movie);
     }
+
     @Override
-    public Movie updateMovie(Movie movie) {
-        return movieRepository.save(movie);
+    public void updateMovie(Movie movie) {
+        mongoTemplate.save(movie);
     }
+
     @Override
-    public void deleteMovie(String id) {
-        movieRepository.delete(id);
+    public void deleteMovie(Movie movie) {
+        mongoTemplate.remove(movie);
     }
 }
