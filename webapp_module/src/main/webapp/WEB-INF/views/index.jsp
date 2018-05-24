@@ -34,6 +34,8 @@
                 <label for="image"><b>Image</b></label>
                 <input type="text" placeholder="image" name="image" required>
 
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
                 <button type="submit">Save</button>
             </div>
 
@@ -53,14 +55,22 @@
             </ul>
         </div>
         <div id="navigation">
-            <ul>
-                <li><a class="active" href="#">HOME</a></li>
-                <li><a href="#">NEWS</a></li>
-                <li><a href="#">IN THEATERS</a></li>
-                <li><a href="#">COMING SOON</a></li>
-                <li><a href="#">CONTACT</a></li>
-                <li><a href="#">ADVERTISE</a></li>
-            </ul>
+            <c:choose>
+                <c:when test="${not empty pageContext.request.remoteUser}">
+                    <form action="/logout" method="post">
+                        <ul>
+                            <li><label><h1>Hello <b><c:out value="${pageContext.request.remoteUser}"></c:out></b></h1></label></li>
+                            <li><input class="cancelbtn" type="submit" value="Sign Out" /></li>
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                        </ul>
+                    </form>
+                </c:when>
+                <c:otherwise>
+                    <ul>
+                        <li><a href="/login">Login</a></li>
+                    </ul>
+                </c:otherwise>
+            </c:choose>
         </div>
         <div id="sub-navigation">
             <ul>
