@@ -16,7 +16,7 @@ import ua.pp.movie_posters.webapp.services.CustomUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
-@EnableAutoConfiguration(exclude = { SecurityAutoConfiguration.class})
+@EnableAutoConfiguration(exclude = {SecurityAutoConfiguration.class})
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
@@ -26,19 +26,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()   //temporary disable
+        http.csrf().disable()   //temporary disable
                 .authorizeRequests()
                 .antMatchers("/api/**").permitAll() // all api http methods is allowed
-                .antMatchers(HttpMethod.GET,"/resources/**", "/").permitAll() //only get requests
+                .antMatchers(HttpMethod.GET, "/resources/**", "/").permitAll() //only get requests
                 .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll();
+                .and().formLogin().loginPage("/login").permitAll()
+                .and().logout().permitAll()
+                .and().exceptionHandling().accessDeniedPage("/Access_Denied");
     }
 
     @Autowired
