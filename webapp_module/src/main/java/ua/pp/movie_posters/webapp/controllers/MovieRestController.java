@@ -13,29 +13,29 @@ public class MovieRestController {
     @Qualifier("MovieServiceRepositoryImpl")
     private MovieService movieService;
     @ResponseBody
-    @RequestMapping(value = "/movies", method = RequestMethod.GET)
+    @GetMapping(value = "/movies")
     public List<Movie> getAllMovies() {
         return movieService.getAllMovies();
     }
     @ResponseBody
-    @RequestMapping(value = "/movies/{name}", method = RequestMethod.GET)
+    @GetMapping(value = "/movies/{name}")
     public Movie getMovieByName(@PathVariable String name) {
         return movieService.getMovieByName(name);
     }
     @ResponseBody
-    @RequestMapping(value = "/movies", method = RequestMethod.POST)
+    @PostMapping(value = "/movies")
     public String addMovie(@RequestBody Movie movie) {
         movieService.addMovie(movie);
         return "Created";
     }
     @ResponseBody
-    @RequestMapping(value = "/movies", method = RequestMethod.PUT)
+    @PutMapping(value = "/movies")
     public String updateMovie(@RequestBody Movie movie) {
         movieService.updateMovie(movie);
         return "Updated";
     }
     @ResponseBody
-    @RequestMapping(value = "/movies/{name}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/movies/{name}")
     public String deleteMovie(@PathVariable String name) {
         Movie movie = movieService.getMovieByName(name);
         movieService.deleteMovie(movie);
