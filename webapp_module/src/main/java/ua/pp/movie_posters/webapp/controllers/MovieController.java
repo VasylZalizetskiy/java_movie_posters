@@ -55,4 +55,12 @@ public class MovieController {
 
         return "index";
     }
+
+    @GetMapping("/remove")
+    public String removeMovie(@RequestParam(name="name") String name) {
+        Movie movie = movieService.getMovieByName(name);
+        movieService.deleteMovie(movie);
+
+        return "redirect:/";
+    }
 }

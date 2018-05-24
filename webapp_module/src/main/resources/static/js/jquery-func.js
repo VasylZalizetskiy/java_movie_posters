@@ -9,6 +9,15 @@ $(document).ready(function(){
 		$(this).find(".play").hide();
 	});
 
+    $(".movie-image").hover(function(){
+            $(this).find(".remove").show();
+
+        },
+        function()
+        {
+            $(this).find(".remove").hide();
+        });
+
 
 	$(".blink").focus(function() {
             if(this.title==this.value) {

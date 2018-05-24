@@ -102,7 +102,14 @@
 <c:forEach items="${movieList}" var="item">
                 <div class="movie">
                     <h1>${item.name}</h1>
-                    <div class="movie-image"> <span class="play"><span class="name">${item.name}</span></span> <a href="#"><img src="/resources/images/${item.image}.jpg" alt="" /></a> </div>
+                    <c:choose>
+                        <c:when test="${not empty pageContext.request.remoteUser}">
+                    <a href="/remove/?name=${item.name}"> <div class="movie-image"> <span class="remove"><span class="name">${item.name}</span></span> <img src="/resources/images/${item.image}.jpg" alt="" /></div></a>
+                        </c:when>
+                        <c:otherwise>
+                    <a href="#"><div class="movie-image"> <span class="play"><span class="name">${item.name}</span></span> <img src="/resources/images/${item.image}.jpg" alt="" /></div></a>
+                        </c:otherwise>
+                    </c:choose>
                     <div class="rating">
                         <p>RATING</p>
                         <div class="stars">
