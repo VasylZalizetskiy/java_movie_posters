@@ -7,33 +7,35 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api")
 public class MovieRestController {
     @Autowired
-    @Qualifier("MovieServiceTemplateImpl")
+    @Qualifier("MovieServiceRepositoryImpl")
     private MovieService movieService;
     @ResponseBody
-    @RequestMapping(value = "/api/movies", method = RequestMethod.GET)
+    @RequestMapping(value = "/movies", method = RequestMethod.GET)
     public List<Movie> getAllMovies() {
         return movieService.getAllMovies();
     }
     @ResponseBody
-    @RequestMapping(value = "/api/movies/{name}", method = RequestMethod.GET)
+    @RequestMapping(value = "/movies/{name}", method = RequestMethod.GET)
     public Movie getMovieByName(@PathVariable String name) {
         return movieService.getMovieByName(name);
     }
     @ResponseBody
-    @RequestMapping(value = "/api/movies", method = RequestMethod.POST)
-    public void addMovie(@RequestBody Movie movie) {
+    @RequestMapping(value = "/movies", method = RequestMethod.POST)
+    public String addMovie(@RequestBody Movie movie) {
         movieService.addMovie(movie);
+        return "Created";
     }
     @ResponseBody
-    @RequestMapping(value = "/api/movies", method = RequestMethod.PUT)
+    @RequestMapping(value = "/movies", method = RequestMethod.PUT)
     public String updateMovie(@RequestBody Movie movie) {
         movieService.updateMovie(movie);
         return "Updated";
     }
     @ResponseBody
-    @RequestMapping(value = "/api/movies/{name}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/movies/{name}", method = RequestMethod.DELETE)
     public String deleteMovie(@PathVariable String name) {
         Movie movie = movieService.getMovieByName(name);
         movieService.deleteMovie(movie);

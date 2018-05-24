@@ -30,7 +30,7 @@ public class MovieController {
     }
 
     @Autowired
-    @Qualifier("MovieServiceTemplateImpl")
+    @Qualifier("MovieServiceRepositoryImpl")
     MovieService movieService;
 
     @GetMapping("/")
@@ -42,14 +42,8 @@ public class MovieController {
         return "index";
     }
 
-    @GetMapping("/admin")
-    public String adminListByYear(@RequestParam(name="year", required=false) Integer year, ModelMap model) {
-        List<Movie> movieList = (year != null) ? movieService.getAllMovies(year) : movieService.getAllMovies();
-
-        model.addAttribute("movieList", movieList);
-
-        return "index";
-    }
+    @GetMapping("/login")
+    public String adminListByYear() { return "login"; }
 
     @PostMapping("/")
     public String addMovie(Movie movie, ModelMap model) {
