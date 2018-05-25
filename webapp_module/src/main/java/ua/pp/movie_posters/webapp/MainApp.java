@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class MainApp extends SpringBootServletInitializer {
-
+/*
    static public final String topicExchangeName = "spring-boot-exchange";
 
    static public final String queueName = "spring-boot";
@@ -50,7 +50,7 @@ public class MainApp extends SpringBootServletInitializer {
    MessageListenerAdapter listenerAdapter(Receiver receiver) {
       return new MessageListenerAdapter(receiver, "receiveMessage");
    }
-
+*/
    @Override
    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
       return application.sources(MainApp.class);

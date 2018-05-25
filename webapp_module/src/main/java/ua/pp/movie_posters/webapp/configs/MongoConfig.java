@@ -1,6 +1,5 @@
 package ua.pp.movie_posters.webapp.configs;
 
-import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

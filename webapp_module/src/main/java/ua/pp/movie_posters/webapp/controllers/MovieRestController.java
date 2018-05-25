@@ -1,4 +1,5 @@
 package ua.pp.movie_posters.webapp.controllers;
+
 import ua.pp.movie_posters.models.Movie;
 import ua.pp.movie_posters.webapp.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;

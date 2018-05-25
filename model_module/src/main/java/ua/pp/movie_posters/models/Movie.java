@@ -19,4 +19,10 @@ public class Movie implements Serializable{
     private String name;
     private int year;
     private String image;
+
+    public Movie (String name,int year, String image) {
+        this.name=name;
+        this.year=year;
+        this.image=image;
+    }
 }

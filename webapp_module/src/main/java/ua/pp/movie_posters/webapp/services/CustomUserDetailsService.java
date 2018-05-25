@@ -8,7 +8,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import ua.pp.movie_posters.webapp.models.User;
 import ua.pp.movie_posters.webapp.repositories.UserRepository;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;

@@ -29,7 +29,7 @@ public class AppController {
     @Qualifier("MovieServiceRepositoryImpl")
     MovieService movieService;
 
-
+/*
     private final RabbitTemplate rabbitTemplate;
     private final Receiver receiver;
 
@@ -37,6 +37,7 @@ public class AppController {
         this.receiver = receiver;
         this.rabbitTemplate = rabbitTemplate;
     }
+*/
 
     @GetMapping("/")
     public String getAllMovies(@RequestParam(name="year", required=false) Integer year, ModelMap model) {
@@ -63,7 +64,7 @@ public class AppController {
     public String addMovie(Movie movie, ModelMap model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         movieService.addMovie(movie);
-        rabbitTemplate.convertAndSend(MainApp.topicExchangeName, "foo.bar.baz", "Movie: "+movie.getName()+" are created!");
+//      rabbitTemplate.convertAndSend(MainApp.topicExchangeName, "foo.bar.baz", "Movie: "+movie.getName()+" are created!");
         List<Movie> movieList = movieService.getAllMovies();
         model.addAttribute("movieList", movieList);
 
