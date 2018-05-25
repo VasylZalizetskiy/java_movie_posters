@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -16,7 +17,7 @@ import ua.pp.movie_posters.webapp.services.CustomUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
-@EnableAutoConfiguration(exclude = {SecurityAutoConfiguration.class})
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
@@ -29,11 +30,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()   //temporary disable
                 .authorizeRequests()
                 .antMatchers("/api/**").permitAll() // all api http methods is allowed
-                .antMatchers(HttpMethod.GET, "/resources/**", "/").permitAll() //only get requests
+                .antMatchers(HttpMethod.GET, "/resources/**", "/","/denied").permitAll() //only get requests
+                .antMatchers(HttpMethod.POST, "/denied").permitAll() //only get requests
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").permitAll()
                 .and().logout().permitAll()
-                .and().exceptionHandling().accessDeniedPage("/Access_Denied");
+                .and().exceptionHandling().accessDeniedPage("/denied");
     }
 
     @Autowired
