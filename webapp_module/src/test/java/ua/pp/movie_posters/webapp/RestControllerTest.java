@@ -1,4 +1,4 @@
-package ua.pp.movie_posters;
+package ua.pp.movie_posters.webapp;
 
 import org.assertj.core.util.Lists;
 import org.junit.Before;

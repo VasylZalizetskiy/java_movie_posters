@@ -1,43 +1,24 @@
-package ua.pp.movie_posters;
+package ua.pp.movie_posters.webapp;
 
-import org.assertj.core.util.Arrays;
-import org.assertj.core.util.Lists;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import ua.pp.movie_posters.models.Movie;
-import ua.pp.movie_posters.webapp.MainApp;
-import ua.pp.movie_posters.webapp.controllers.AppController;
-import ua.pp.movie_posters.webapp.controllers.MovieRestController;
+import ua.pp.movie_posters.webapp.models.User;
 import ua.pp.movie_posters.webapp.repositories.MovieRepository;
-import ua.pp.movie_posters.webapp.services.MovieService;
+import ua.pp.movie_posters.webapp.repositories.UserRepository;
 import ua.pp.movie_posters.webapp.services.impl.MovieServiceRepositoryImpl;
-
-import java.util.ArrayList;
-import java.util.List;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
+import ua.pp.movie_posters.webapp.services.impl.UserServiceImpl;
 import static org.mockito.Mockito.when;
-import static org.mockito.internal.verification.VerificationModeFactory.times;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
@@ -53,20 +34,22 @@ public class AppControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
-    MovieRepository movieRepository;
+    private Movie testMovie = new Movie("test", 2018, "test");
 
     @Mock
-    MovieService movieService;
+    private MovieRepository movieRepository;
+
+    @Mock
+    private UserRepository userRepository;
 
     @InjectMocks
-    private AppController appController;
+    private MovieServiceRepositoryImpl movieService;
 
-    Movie movie = new Movie("test", 2018, "test");
+    @InjectMocks
+    private UserServiceImpl userService;
 
     @Test
     public void accessUnsecuredResourceThenOk() throws Exception {
-//        when(movieService.getAllMovies()).thenReturn(movies);
 
         this.mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
@@ -75,13 +58,19 @@ public class AppControllerTest {
     }
 
     @Test
-    public void loginWithValidUserThenAuthenticated() throws Exception {
-        SecurityMockMvcRequestBuilders.FormLoginRequestBuilder login = formLogin()
-                .user("admin")
-                .password("password");
+    public void loginAvailableForAll() throws Exception {
+        mockMvc
+                .perform(get("/login"))
+                .andExpect(status().isOk());
+    }
 
-        mockMvc.perform(login)
-                .andExpect(authenticated().withUsername("admin"));
+    @Test
+    public void loginWithValidUserThenAuthenticated() throws Exception {
+        mockMvc
+                .perform(formLogin().user("user").password("password"))
+                .andExpect(status().isFound())
+                .andExpect(redirectedUrl("/"))
+                .andExpect(authenticated().withUsername("user"));
     }
 
     @Test
@@ -97,20 +86,20 @@ public class AppControllerTest {
     @Test
     public void accessSecuredResourceUnauthenticatedThenRedirectsToLogin() throws Exception {
         mockMvc.perform(post("/")
-                .param("name", movie.getName())
-                .param("year", String.valueOf(movie.getYear()))
-                .param("image", movie.getImage()))
+                .param("name", testMovie.getName())
+                .param("year", String.valueOf(testMovie.getYear()))
+                .param("image", testMovie.getImage()))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrlPattern("**/login"));
     }
 
     @Test
-    @WithMockUser(username="admin",roles={"USER","ADMIN"})
+    @WithMockUser(username = "admin", roles = {"USER", "ADMIN"})
     public void accessSecuredResourceAuthenticatedThenOk() throws Exception {
         mockMvc.perform(post("/")
-                .param("name", movie.getName())
-                .param("year", String.valueOf(movie.getYear()))
-                .param("image", movie.getImage()))
+                .param("name", testMovie.getName())
+                .param("year", String.valueOf(testMovie.getYear()))
+                .param("image", testMovie.getImage()))
                 .andExpect(status().isOk());
     }
 

@@ -1,4 +1,4 @@
-package ua.pp.movie_posters.configs;
+package ua.pp.movie_posters.webapp.configs;
 
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
