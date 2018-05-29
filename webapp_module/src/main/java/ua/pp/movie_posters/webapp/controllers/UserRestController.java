@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/users")
 public class UserRestController {
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -19,19 +19,19 @@ public class UserRestController {
     private UserService userService;
 
     @ResponseBody
-    @GetMapping(value = "/users")
+    @GetMapping
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
     @ResponseBody
-    @GetMapping(value = "/users/{name}")
+    @GetMapping(value = "/{name}")
     public User getUserByName(@PathVariable String name) {
         return userService.getUserByName(name);
     }
 
     @ResponseBody
-    @PostMapping(value = "/users")
+    @PostMapping
     public String addUser(@RequestBody(required=false) User reqUser) {
         User user = (reqUser != null) ? reqUser : new User("user", "password") ;
 
@@ -48,14 +48,14 @@ public class UserRestController {
     }
 
     @ResponseBody
-    @PutMapping(value = "/users")
+    @PutMapping
     public String updateUser(@RequestBody User user) {
         userService.updateUser(user);
         return "Updated";
     }
 
     @ResponseBody
-    @DeleteMapping(value = "/users/{name}")
+    @DeleteMapping(value = "/{name}")
     public String deleteUser(@PathVariable String name) {
         User user = userService.getUserByName(name);
         userService.deleteUser(user);
