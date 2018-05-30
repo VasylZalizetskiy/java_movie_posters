@@ -1,24 +1,25 @@
 package ua.pp.movie_posters.webapp;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import ua.pp.movie_posters.models.Movie;
+import ua.pp.movie_posters.webapp.configs.MongoConfig;
 import ua.pp.movie_posters.webapp.models.User;
 import ua.pp.movie_posters.webapp.repositories.MovieRepository;
 import ua.pp.movie_posters.webapp.repositories.UserRepository;
-import ua.pp.movie_posters.webapp.services.impl.MovieServiceRepositoryImpl;
-import ua.pp.movie_posters.webapp.services.impl.UserServiceImpl;
-import static org.mockito.Mockito.when;
+
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders.formLogin;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.unauthenticated;
@@ -28,25 +29,46 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = MainApp.class)
+@SpringBootTest(classes = {MainApp.class, MongoConfig.class})
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
 public class AppControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
     private Movie testMovie = new Movie("test", 2018, "test");
 
-    @Mock
+    @Autowired
     private MovieRepository movieRepository;
 
-    @Mock
+    @Autowired
     private UserRepository userRepository;
 
-    @InjectMocks
-    private MovieServiceRepositoryImpl movieService;
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    @InjectMocks
-    private UserServiceImpl userService;
+    @Before
+    public void setUp() throws Exception {
+        User user= new User();
+        user.setUsername("testUser");
+        user.setPassword(passwordEncoder.encode("password"));
+        user.setEnabled(true);
+        user.setAccountNonExpired(true);
+        user.setAccountNonLocked(true);
+        user.setCredentialsNonExpired(true);
+        user.addRole("ROLE_USER");
+
+        User admin= new User();
+        admin.setUsername("testAdmin");
+        admin.setPassword(passwordEncoder.encode("password"));
+        admin.setEnabled(true);
+        admin.setAccountNonExpired(true);
+        admin.setAccountNonLocked(true);
+        admin.setCredentialsNonExpired(true);
+        admin.addRole("ROLE_ADMIN");
+
+        this.userRepository.save(user);
+        this.userRepository.save(admin);
+    }
 
     @Test
     public void accessUnsecuredResourceThenOk() throws Exception {
@@ -67,10 +89,8 @@ public class AppControllerTest {
     @Test
     public void loginWithValidUserThenAuthenticated() throws Exception {
         mockMvc
-                .perform(formLogin().user("user").password("password"))
-                .andExpect(status().isFound())
-                .andExpect(redirectedUrl("/"))
-                .andExpect(authenticated().withUsername("user"));
+                .perform(formLogin().user("testUser").password("password"))
+                .andExpect(authenticated().withUsername("testUser"));
     }
 
     @Test
@@ -101,6 +121,12 @@ public class AppControllerTest {
                 .param("year", String.valueOf(testMovie.getYear()))
                 .param("image", testMovie.getImage()))
                 .andExpect(status().isOk());
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        this.userRepository.deleteAll();
+        this.movieRepository.deleteAll();
     }
 
 }

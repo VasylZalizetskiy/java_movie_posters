@@ -1,20 +1,20 @@
 package ua.pp.movie_posters.webapp.controllers;
 
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.web.bind.annotation.*;
-import ua.pp.movie_posters.webapp.MainApp;
-import ua.pp.movie_posters.webapp.messaging.Receiver;
-import ua.pp.movie_posters.models.Movie;
-import ua.pp.movie_posters.webapp.services.MovieService;
-import org.slf4j.LoggerFactory;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import ua.pp.movie_posters.models.Movie;
+import ua.pp.movie_posters.webapp.services.MovieService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,9 +38,6 @@ public class AppController {
         this.rabbitTemplate = rabbitTemplate;
     }
 */
-
-//    @RequestMapping(value = "/swagger-ui.html")
-//    public String swaggerUI() { return "swagger-ui"; }
 
     @GetMapping("/")
     public String getAllMovies(@RequestParam(name="year", required=false) Integer year, ModelMap model) {
