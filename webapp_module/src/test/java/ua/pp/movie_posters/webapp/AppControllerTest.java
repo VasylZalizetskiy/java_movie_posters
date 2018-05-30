@@ -11,11 +11,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestBuilders;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import ua.pp.movie_posters.models.Movie;
-import ua.pp.movie_posters.webapp.configs.MongoConfig;
 import ua.pp.movie_posters.webapp.models.User;
 import ua.pp.movie_posters.webapp.repositories.MovieRepository;
 import ua.pp.movie_posters.webapp.repositories.UserRepository;
@@ -29,9 +27,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {MainApp.class, MongoConfig.class})
+@SpringBootTest(classes = MainApp.class)
 @AutoConfigureMockMvc
-@ActiveProfiles("test")
 public class AppControllerTest {
     @Autowired
     private MockMvc mockMvc;
