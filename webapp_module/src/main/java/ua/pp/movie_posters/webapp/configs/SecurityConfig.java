@@ -27,6 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()   //temporary disable
                 .authorizeRequests()
+                .antMatchers("/swagger-resources/**", "/webjars/**", "/v2/api-docs", "/swagger-ui.html").permitAll() //allow all swagger resources
                 .antMatchers("/api/**").permitAll() // all api http methods is allowed
                 .antMatchers(HttpMethod.GET, "/resources/**", "/","/denied").permitAll() //only get requests
                 .antMatchers(HttpMethod.POST, "/denied").permitAll() //only get requests

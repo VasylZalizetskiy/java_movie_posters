@@ -39,6 +39,9 @@ public class AppController {
     }
 */
 
+//    @RequestMapping(value = "/swagger-ui.html")
+//    public String swaggerUI() { return "swagger-ui"; }
+
     @GetMapping("/")
     public String getAllMovies(@RequestParam(name="year", required=false) Integer year, ModelMap model) {
         List<Movie> movieList = (year != null) ? movieService.getAllMovies(year) : movieService.getAllMovies();
